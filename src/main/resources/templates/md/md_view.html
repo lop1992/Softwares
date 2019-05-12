@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head >
+    <script type="text/javascript"   th:src="@{/markDown/js/zepto.min.js}"></script>
+    <script type="text/javascript"   th:src="@{/markDown/editormd.min.js}"></script>
+
+    <link rel="stylesheet" th:href="@{/markDown/css/editormd.css}">
+    <link rel="stylesheet" th:href="@{/markDown/style.css}">
+
+    <script  th:inline="javascript">
+        var jQuery = Zepto;
+        const baseUrl =[[${#httpServletRequest.getScheme() + '://' + #httpServletRequest.getServerName() + ':' + #request.getServerPort()  + #request.getContextPath() + '/'} ]];
+    </script>
+</head>
+<style>
+    .layout{
+        border: 1px solid #d7dde4;
+        background: #f5f7f9;
+        position: relative;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+</style>
+<body>
+
+<div id="my_layout" th:if="${md != null}">
+
+    <textarea class="editormd-markdown-textarea" style="display:none;" id="textContent" name="textContent" th:text="${md.content}">
+
+    </textarea>
+</div>
+</body>
+</html>
+<script>
+var testEditor;
+    $(function () {
+        if(document.querySelector("#my_layout")){
+            testEditor = editormd("my_layout", {
+                width: "99%",
+                height: 740,
+                autoHeight : false,
+                syncScrolling: "single",
+                path:  baseUrl+"markDown/lib/",
+                imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                imageUploadURL: "/file",
+                previewTheme : "dark",
+                tex             : true,// 开启科学公式 TeX 语言支持，默认关闭
+                emoji           : true,
+                taskList        : true,
+                flowChart       : true,
+                sequenceDiagram : true,
+                tocm            : true ,        // Using [TOCM]
+                codeFold : true,
+                toolbar : false,
+                theme        : (localStorage.theme) ? localStorage.theme : "dark",
+  //              readOnly        : true,
+                previewTheme : (localStorage.previewTheme) ? localStorage.previewTheme : "dark",
+
+                editorTheme  : (localStorage.editorTheme) ? localStorage.editorTheme : "pastel-on-dark",
+
+                onload : function() {
+                    this.hideToolbar();
+                    this.previewing();
+                }
+
+            });
+        };
+    });
+</script>
