@@ -83,6 +83,10 @@ public class MarkDownEditController {
     public String SaveMarkDown(MarkDown down){
         try{
             if(down.getId()==null ||  (down.getId()!=2 && down.getId()!=1)){
+                if(down.getId() != null){
+                    MarkDown old=dao.findById(down.getId()).get();
+                    down.setPid(old.getPid());
+                }
                 dao.save(down);
             }
         }catch (Exception e){
