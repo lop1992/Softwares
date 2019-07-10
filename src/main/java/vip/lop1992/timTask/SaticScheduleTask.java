@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Configuration      //1.主要用于标记配置类，兼备Component的效果。
 @EnableScheduling   // 2.开启定时任务
 public class SaticScheduleTask {
-    private static String USERID ="orPQ80xWqDG6FTnevrB4tp39OLpU9HiWJ_IUbE";
+    private static String USERID ="a";
 
         @Scheduled(cron = "1 40 8 * * 1-5")
         private void up() {
