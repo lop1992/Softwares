@@ -12,6 +12,6 @@ import java.util.List;
  */
 @Repository
 public interface MyMindDao extends JpaRepository<MyMind, Long> {
-    @Query(value = "select `id`,`name` ,null as data from my_mind ", nativeQuery = true)
+    @Query(value = "select `id`,`name` ,null as data ,null as credate_time from my_mind ", nativeQuery = true)
     List<MyMind> findIndex();
 }
