@@ -4,6 +4,7 @@ package vip.lop1992.mind.bean;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @DynamicUpdate(true)
@@ -20,6 +21,9 @@ public class MyMind {
 
     @Column(length = 99999)
     private String data;
+
+    @Column(name = "credate_time")
+    private Date creTime;
 
 
     public Long getId() {
@@ -44,5 +48,13 @@ public class MyMind {
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    public Date getCreTime() {
+        return creTime;
+    }
+
+    public void setCreTime(Date creTime) {
+        this.creTime = creTime;
     }
 }
