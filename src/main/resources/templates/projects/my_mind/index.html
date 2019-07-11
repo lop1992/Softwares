@@ -890,7 +890,18 @@
 				<span>Storage</span>
 				<select id="backend"></select>
 			</p>
-			
+
+			<div id="db">
+				<p class="desc">save to local db</p>
+				<p data-for="save">
+					<span>Name</span>
+					<input type="text" class="dbName" />
+				</p>
+				<p data-for="save load">
+					<button class="go"></button><button class="cancel">Cancel</button>
+				</p>
+			</div>
+
 			<div id="file">
 				<p class="desc">Local files are suitable for loading/saving files from other mindmapping applications.</p>
 				<p data-for="save">
@@ -1010,10 +1021,29 @@
 
 
 		<script>
+
+
+            function MMdbSave(data){
+                let name = document.querySelector(".dbName").value;
+                if(!name || name==""){
+                    name= new Date().toLocaleString()
+                }
+                axios.post('/mind/save',{
+                    name:name,
+                    data:JSON.stringify(data)
+                    }
+                )
+                    .then(function (response) {
+                        console.log(response)
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
+            }
 			window.onload = function() {
 				MM.App.init();
 				MM.App.io.restore();
-
 
 				if(document.querySelector("#getId")){
 
