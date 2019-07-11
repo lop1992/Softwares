@@ -3,13 +3,11 @@ package vip.lop1992.mind;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import vip.lop1992.mind.bean.MyMind;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,10 +51,9 @@ public class MyMindController {
 
     @PostMapping("/mind/save")
     @ResponseBody
-    public String save(MyMind m){
+    public String save(@RequestBody MyMind m){
+        m.setCreTime(new Date());
         dao.save(m);
         return "{code:1}";
     }
-
-
 }
