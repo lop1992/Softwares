@@ -1,0 +1,36 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <ol>
+        <li v-for="m in minds">
+            <a :href= "'/DBDesiner/edit?id=' +m.id"> {{ m.name }} </a>
+        </li>
+    </ol>
+</div>
+</body>
+
+<script>
+        axios.post('/DBDesiner/index')
+          .then(function (response) {
+            console.log(response);
+
+            new Vue({
+              el: '#app',
+              data: {
+                minds: response.data
+              }
+            })
+
+
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+    </script>
+</html>
